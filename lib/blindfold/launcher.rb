@@ -25,8 +25,7 @@ class Launcher
   def init_helpers
     helpers_dir = File.join(Blindfold.config_dir, HELPERS_DIR)
     if Dir.exists?(helpers_dir)
-      # Dir[File.join(helpers_dir,'**','*.rb')].each {|f| load f}
-      Dir[File.join(helpers_dir,'**','*.rb')].each {|f| warn "LOADING #{f}..."; load f}
+      Dir[File.join(helpers_dir,'**','*.rb')].each {|f| load f}
     end
   end
 

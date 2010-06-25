@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name    = 'blindfold'
-  gem.version = '0.0.1'
+  gem.version = '0.0.2'
   gem.date    = %{2010-06-24}
 
   gem.authors  = ["James Bunch (fallwith)"]
