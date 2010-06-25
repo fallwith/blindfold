@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require 'isolate/now'
+require 'blindfold'
+
+opts = {:config_dir => File.expand_path(File.dirname(__FILE__) + '/../tests/config'),
+        :rails_root => File.expand_path(File.dirname(__FILE__) + '/..'),
+        :boot_redis => true}
+
+Launcher.new(opts).run(ARGV)

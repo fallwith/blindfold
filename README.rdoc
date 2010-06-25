@@ -1,0 +1,29 @@
+= Blindfold
+
+API/XML focused integration testing for Rack apps
+
+== What is Blindfold?
+
+Blindfold brings together RSpec, Rack::Test, and Machinist for the
+express purpose of providing integration test coverage for web based
+API services (especially those with an XML response).
+
+== Usage
+
+  $ gem install blindfold
+
+  $ blindfold /path/to/blindfold_test.rb
+
+== Configuration
+
+  (Coming)
+
+== Resources
+
+- Source: http://github.com/fallwith/blindfold
+
+== Credits
+
+Blindfold was created by James Bunch (fallwith) and improved by the SCEA SDOD team
+
+Copyright (c) 2010 James Bunch, released under the MIT license
