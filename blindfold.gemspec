@@ -25,7 +25,7 @@ Gem::Specification.new do |gem|
     'lib/blindfold/helpers/db.rb',
     'lib/blindfold/helpers.rb',
     'lib/blindfold/launcher.rb',
-    'lib/blindfold/spec/matches/be_an_ip_address.rb',
+    'lib/blindfold/spec/matchers/be_an_ip_address.rb',
     'lib/blindfold/spec/matchers/be_an_iso_date.rb',
     'lib/blindfold/spec/matchers/be_ok.rb',
     'lib/blindfold/spec/monkey.rb',
