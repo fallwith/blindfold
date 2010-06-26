@@ -11,6 +11,12 @@ module Nokogiri::XML
     def attribute_value(name)
       attribute(name).value
     end
+    def elements(name)
+      xpath(name)
+    end
+    def element(name)
+      elements(name).first
+    end
   end
   class NodeSet
     def with_attributes(attributes)
