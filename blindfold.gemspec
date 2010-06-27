@@ -2,8 +2,8 @@
 
 Gem::Specification.new do |gem|
   gem.name    = 'blindfold'
-  gem.version = '0.0.3'
-  gem.date    = %{2010-06-25}
+  gem.version = '0.0.4'
+  gem.date    = %{2010-06-26}
 
   gem.authors  = ["James Bunch (fallwith)"]
   gem.email    = nil
@@ -14,33 +14,11 @@ Gem::Specification.new do |gem|
                      express purpose of providing integration test coverage for web based
                      API services (especially those with an XML response)."
 
-  gem.files = [
-    '.gitignore',
-    'bin/blindfold',
-    'blindfold.gemspec',
-    'config/spec.opts',
-    'init.rb',
-    'lib/blindfold/connection.rb',
-    'lib/blindfold/helpers/date.rb',
-    'lib/blindfold/helpers/db.rb',
-    'lib/blindfold/helpers.rb',
-    'lib/blindfold/launcher.rb',
-    'lib/blindfold/spec/matchers/be_an_ip_address.rb',
-    'lib/blindfold/spec/matchers/be_an_iso_date.rb',
-    'lib/blindfold/spec/matchers/be_ok.rb',
-    'lib/blindfold/spec/monkey.rb',
-    'lib/blindfold/spec.rb',
-    'lib/blindfold/xml/monkey.rb',
-    'lib/blindfold/xml.rb',
-    'lib/blindfold.rb',
-    'MIT-LICENSE',
-    'Rakefile',
-    'README.rdoc',
-    'VERSION'
-  ]
+  gem.files = `git ls-files -z`.split("\0").reject{|f|f =~ /^\./}
 
   gem.add_dependency('rspec', '>= 1.3.0')
   gem.add_dependency('rack-test', '>= 0.5.4')
   gem.add_dependency('machinist', '>= 1.0.6')
   gem.add_dependency('forgery', '>= 0.3.4')
+  gem.add_dependency('nokogiri', '>= 1.3.2')
 end
