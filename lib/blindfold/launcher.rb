@@ -1,8 +1,14 @@
 class Launcher
-  SPEC_OPTS_FILE  = 'spec.opts'
-  BLUEPRINTS_DIR  = 'blueprints'  # lives within config_dir
-  MATCHERS_DIR    = 'matchers'    # lives within config_dir
-  HELPERS_DIR     = 'helpers'     # lives within config_dir
+  mattr_accessor :spec_opts_file
+  mattr_accessor :blueprints_dir
+  mattr_accessor :matchers_dir
+  mattr_accessor :helpers_dir
+  
+  # these all leave beneath the config dir
+  @@spec_opts_file  = 'spec.opts'
+  @@blueprints_dir  = 'blueprints'
+  @@matchers_dir    = 'matchers'
+  @@helpers_dir     = 'helpers'
 
   def initialize(args={})
     Blindfold.config_dir = args[:config_dir] if args.has_key?(:config_dir)
@@ -23,7 +29,7 @@ class Launcher
   private
 
   def init_helpers
-    helpers_dir = File.join(Blindfold.config_dir, HELPERS_DIR)
+    helpers_dir = File.join(Blindfold.config_dir, @@helpers_dir)
     if Dir.exists?(helpers_dir)
       Dir[File.join(helpers_dir,'**','*.rb')].each {|f| load f}
     end
@@ -33,14 +39,14 @@ class Launcher
     # Introduce all helper methods to Machinist
     Machinist::Lathe.send :include, HelperMethods
     # Load up all blueprints
-    blueprints_dir = File.join(Blindfold.config_dir, BLUEPRINTS_DIR)
+    blueprints_dir = File.join(Blindfold.config_dir, @@blueprints_dir)
     if Dir.exists?(blueprints_dir)
       Dir[File.join(blueprints_dir,'**','*_blueprint.rb')].each {|f| load f}
     end
   end
   
   def init_matchers
-    matchers_dir = File.join(Blindfold.config_dir, MATCHERS_DIR)
+    matchers_dir = File.join(Blindfold.config_dir, @@matchers_dir)
     if Dir.exists?(matchers_dir)
       Dir[File.join(matchers_dir,'**','*.rb')].each {|f| load f}
     end
@@ -57,7 +63,7 @@ class Launcher
     Spec::Runner.configuration.include(HelperMethods)
 
     # Specify which spec.opts file to use
-    spec_opts = File.join(Blindfold.config_dir, SPEC_OPTS_FILE)
+    spec_opts = File.join(Blindfold.config_dir, @@spec_opts_file)
     if File.exists?(spec_opts)
       args << '-O' << spec_opts
     end
