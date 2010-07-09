@@ -17,6 +17,7 @@ class Launcher
   end
   
   def run(arguments)
+    arguments = Array(arguments)
     start_redis if Blindfold.boot_redis
     init_rails if Blindfold.rails_root
     init_helpers
