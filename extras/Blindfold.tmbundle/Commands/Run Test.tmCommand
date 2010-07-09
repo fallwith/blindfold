@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>saveActiveFile</string>
+	<key>command</key>
+	<string>#!/usr/bin/env sh
+cat &lt;&lt;'EOF' &gt;/tmp/tm-blindfold-cmd-$$.rb
+
+# temporary solution to go searching for a root dir
+# with an Isolate file
+def find_isolate_root(path)
+  root = nil
+  i=0
+  until root
+    abs = File.expand_path(File.dirname(path))
+    if File.exists?(File.join(abs,'Isolate'))
+      root = abs
+      break
+    end
+    break if (i+=1) &gt; 100
+    path = File.expand_path(File.dirname(abs + '/..'))
+  end
+  root
+end
+
+isolate_root = find_isolate_root(ENV['TM_FILEPATH'])
+Dir.chdir isolate_root
+
+require 'isolate/now'
+require 'blindfold'
+
+opts = {:config_dir =&gt; File.expand_path(isolate_root + '/tests/config'),
+        :rails_root =&gt; isolate_root,
+        :boot_redis =&gt; true}
+
+Launcher.new(opts).run(ENV['TM_FILEPATH'])
+EOF
+
+${TM_RUBY:-ruby} /tmp/tm-blindfold-cmd-$$.rb; exit_status=$?; rm /tmp/tm-blindfold-cmd-$$.rb; exit $exit_status</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>@B</string>
+	<key>name</key>
+	<string>Run Test</string>
+	<key>output</key>
+	<string>showAsHTML</string>
+	<key>uuid</key>
+	<string>C3BB5888-8A58-4483-8616-62E1879A46BF</string>
+</dict>
+</plist>
